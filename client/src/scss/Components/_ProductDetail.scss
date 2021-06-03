@@ -1,0 +1,57 @@
+#product_id {
+    color: grey;
+    font-size: 0.8rem;
+}
+
+#product_price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#cart_btn,
+#review_btn {
+    border-radius: 2rem;
+    background-color: $color-primary;
+    border: none;
+    padding: 0.5rem 2rem;
+}
+
+#product_seller {
+    color: grey;
+    font-size: 0.9rem;
+}
+
+#stock_status {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-left: 0.3rem;
+}
+
+.redColor {
+    color: red;
+}
+
+.greenColor {
+    color: green;
+}
+
+#product_image {
+    margin-top: 3.5rem;
+}
+
+.stockCounter input {
+    border: none;
+    width: 3rem;
+    text-align: center;
+}
+
+.plus,
+.minus {
+    padding: 0.1rem 0.5rem;
+}
+
+.stockCounter input::-webkit-outer-spin-button,
+.stockCounter input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

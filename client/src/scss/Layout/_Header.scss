@@ -1,0 +1,136 @@
+.navbar {
+  background-color: #232f3e;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center !important;
+  ul {
+    background-color: white;
+    z-index: 1;
+    margin-top: 5px;
+  }
+  ul {
+    li {
+      list-style: none;
+      padding: 5px 10px;
+    }
+  }
+
+
+  li a {
+    font-weight: 500;
+    color: $color-primary-dark;
+    letter-spacing: 1.5px;
+
+    text-decoration: none;
+  }
+
+  &__search--btn {
+    background-color: $color-primary-dark;
+  }
+  &__input {
+    display: flex;
+    width: 100%;
+    &--btn {
+      margin-left: -0.25rem;
+    }
+  }
+
+  &__search_field {
+    height: 2.4rem;
+    padding: 1rem;
+  }
+
+  &__login--btn {
+    background-color: $color-primary-dark;
+    padding: 0.4rem 1.8rem;
+    font-family: calibri;
+  }
+  &__center{
+    justify-content: flex-end;
+  }
+  &__cart {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  &__cart--count {
+    color: $color-primary-dark;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  &__avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  &__drop-nav {
+    position: relative;
+    padding: 10px 0;
+  }
+  &__drop-nav a {
+    text-transform: capitalize;
+    overflow: hidden;
+  }
+  &__dropdown {
+    position: absolute;
+    background: white;
+    padding: 0px;
+    width: calc(100% + 30px);
+    top: 50px;
+    display: none;
+  }
+  &__dropdown li {
+    display: block;
+  }
+  &__drop-nav:hover  .navbar__dropdown{
+    display: block;
+  }
+}
+
+@media only screen and (max-width:1200px){
+  .navbar {
+    &__login--btn {
+      padding: 0.2rem 1rem;
+      
+    }
+    &__center{
+      justify-content: center;
+    }
+  }
+}
+
+@media only screen and (max-width:768px){
+  .navbar {
+    &__login--btn {
+      padding: 0.2rem 1rem;
+      
+    }
+    &__center{
+      display: flex;
+      justify-content: center;
+    }
+    &__cart {
+      font-size: 1.5rem;
+      color: white;
+    }
+    &__input {
+      width: 100%;
+     
+    }
+    &__cart--count {
+      background-color: $color-primary-dark;
+      border-radius: 0.2rem;
+      padding: 0rem 0.5rem;
+      color: black;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media only screen and (max-width:576px){
+}
+
+@media only screen and (max-width:480px){
+}

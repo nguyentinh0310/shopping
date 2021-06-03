@@ -1,0 +1,16 @@
+/* Pagination */
+.page-item.active .page-link {
+  background-color: $color-primary;
+  cursor: pointer;
+
+  border-color: $color-primary;
+}
+
+.page-link {
+  color: $color-primary;
+}
+
+.page-link:hover {
+  color: $color-primary;
+  cursor: pointer;
+}

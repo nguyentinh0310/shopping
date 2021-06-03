@@ -1,0 +1,8 @@
+.button{
+    &__checkout{
+        background-color: $color-primary;
+        border-color: $color-primary;
+        margin-top: 2rem;
+        border-radius: 5rem;
+    }
+}

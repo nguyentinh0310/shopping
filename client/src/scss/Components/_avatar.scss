@@ -1,0 +1,26 @@
+/* Avatar */
+.avatar {
+  display: inline-block;
+  height: 15rem;
+  width: 15rem;
+  margin: 0 auto;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.btn.focus,
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
