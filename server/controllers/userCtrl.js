@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendMail = require("./sendMail");
 const { google } = require("googleapis");
+const cloudinary = require("cloudinary");
 const { OAuth2 } = google.auth;
 
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID);
@@ -230,13 +231,30 @@ const userCtrl = {
 
   updateProfile: async (req, res, next) => {
     try {
-      const { name, avatar } = req.body;
-      if (!name)
-        return res.status(400).json({ message: "Xin mời nhập lại tên 😢!" });
+      const newUserData = {
+        name: req.body.name,
+      };
 
+      if (req.body.avatar !== "") {
+        const user = await Users.findById(req.user.id);
+
+        const image_id = user.avatar.public_id;
+        await cloudinary.v2.uploader.destroy(image_id);
+
+        const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+          folder: "avatars",
+          width: 150,
+          crop: "scale",
+        });
+
+        newUserData.avatar = {
+          public_id: result.public_id,
+          url: result.secure_url,
+        };
+      }
       await Users.findByIdAndUpdate(
         req.user.id,
-        { name, avatar },
+        newUserData,
         {
           new: true,
           runValidators: true,
@@ -275,7 +293,6 @@ const userCtrl = {
       next(err);
     }
   },
-
 
   updatePassword: async (req, res, next) => {
     try {

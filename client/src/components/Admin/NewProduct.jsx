@@ -26,14 +26,14 @@ const NewProduct = () => {
   useEffect(() => {
     if (error) {
       toast.error(error, {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: toast.POSITION.BOTTOM_CENTER,
       });
 
       dispatch(clearErrors());
     }
     if (success) {
       toast.success("Tạo sản phẩm thành công", {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: toast.POSITION.BOTTOM_CENTER,
       });
       history.push("/admin/products");
       dispatch({ type: NEW_PRODUCT_RESET });
@@ -63,7 +63,6 @@ const NewProduct = () => {
 
     setImagesPreview([]);
     setImages([]);
-
     files.forEach((file) => {
       const reader = new FileReader();
 
@@ -73,6 +72,8 @@ const NewProduct = () => {
           setImages((oldArray) => [...oldArray, reader.result]);
         }
       };
+
+
 
       reader.readAsDataURL(file);
     });
@@ -168,6 +169,7 @@ const NewProduct = () => {
                       name="images"
                       className="custom-file-input"
                       id="customFile"
+                      accept='image/*'
                       onChange={handleOnChange}
                       multiple
                     />
@@ -202,6 +204,6 @@ const NewProduct = () => {
       </div>
     </Fragment>
   );
-}
+};
 
 export default NewProduct;

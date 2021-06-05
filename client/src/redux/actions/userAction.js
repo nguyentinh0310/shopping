@@ -211,14 +211,15 @@ export const updatePassword = (token, userData) => async (dispatch) => {
       userData,
       config
     );
-    // console.log("data: ", data);
-    // console.log("pw: ", userData);
+    console.log("data: ", data);
+    console.log("pw: ", userData);
 
     dispatch({
       type: UPDATE_PASSWORD_SUCCESS,
       payload: data.message,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: UPDATE_PASSWORD_FAIL,
       payload: error.response.data.message,

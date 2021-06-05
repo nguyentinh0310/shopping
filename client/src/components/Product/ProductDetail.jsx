@@ -70,7 +70,7 @@ const ProductDetail = ({ match }) => {
           <div className="container">
             <div className="row f-flex justify-content-around product">
               <div className="col-12 col-lg-5  img-fluid" id="product_image">
-                <Carousel pause="hover">
+              <Carousel pause="hover">
                   {product.images &&
                     product.images.map((image) => (
                       <img

@@ -10,15 +10,15 @@ import { toast } from "react-toastify";
 const Shipping = () => {
   const { shippingInfo } = useSelector((state) => state.cart);
 
-  // const [address, setAddress] = useState(shippingInfo.address);
-  // const [district, setDistrict] = useState(shippingInfo.district);
-  // const [city, setCity] = useState(shippingInfo.city);
-  // const [phone, setPhone] = useState(shippingInfo.phone);
+  const [address, setAddress] = useState(shippingInfo.address);
+  const [district, setDistrict] = useState(shippingInfo.district);
+  const [city, setCity] = useState(shippingInfo.city);
+  const [phone, setPhone] = useState(shippingInfo.phone);
 
-  const [address, setAddress] = useState('');
-  const [district, setDistrict] = useState('');
-  const [city, setCity] = useState('');
-  const [phone, setPhone] = useState('');
+  // const [address, setAddress] = useState('');
+  // const [district, setDistrict] = useState('');
+  // const [city, setCity] = useState('');
+  // const [phone, setPhone] = useState('');
 
   const history = useHistory();
   const dispatch = useDispatch();

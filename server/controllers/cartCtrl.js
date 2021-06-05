@@ -3,36 +3,12 @@ const Cart = require("../models/cartModel");
 const cartCtrl = {
   addToCart: async (req, res, next) => {
     try {
-      const cart  = new Cart({
-        user: req.user.id,
+      const item  = {
+        user: req.user._id,
         cartItems: [req.body.cartItems],
-      });
-      if(cart){
-        const product = req.body.cartItems.product;
-        const item = cart.cartItems.find((c) => (c.product == product));
-  
-        if (item) {
-          await Cart.findOneAndUpdate(
-            { "user": req.user._id, "cartItems.cart": product },
-            {
-              "$set": {
-                "cartItems": {
-                  ...req.body.cartItems,
-                  quantity : item.quantity + req.body.cartItems.quantity
-                },
-              },
-            })
-          } 
-      }else {
-        await Cart.findOneAndUpdate(
-          { user: req.user._id },
-          {
-            "$push": {
-              "cartItems": req.body.cartItems,
-            },
-          }
-        )
-      }
+      };
+      console.log(item);
+     
       await cart.save();
       res.status(201).json({
         message: "Thêm vào giỏ hàng thành công!",

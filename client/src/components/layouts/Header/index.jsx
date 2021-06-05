@@ -16,7 +16,7 @@ const Header = () => {
     return (
       <li className="navbar__drop-nav">
         <Link to="#" className="navbar__avatar">
-          <img src={user.avatar} alt="" /> <span>{user.name} </span>
+          <img src={user.avatar.url} alt="" /> <span>{user.name} </span>
           <i className="fas fa-caret-down"></i>
         </Link>
         <ul className="navbar__dropdown">
@@ -52,7 +52,7 @@ const Header = () => {
   return (
     <Fragment>
       <Nav className="navbar row">
-        <div md="col-12 col-md-2 mt-2 mt-md-0 text-center">
+        <div md="col-12 col-md-3 mt-2 mt-md-0 text-center">
           <Link to="/" className="navbar__brand">
             <img src="/images/logo.png" alt="logo" />
           </Link>
@@ -60,7 +60,7 @@ const Header = () => {
         <div className="col-12 col-md-6 mt-2 mt-md-0">
           <Route render={({ history }) => <Search history={history} />} />
         </div>
-        <div className="col-12 col-md-4 mt-4 mt-md-0 d-flex navbar__center">
+        <div className="col-12 col-md-3 mt-4 mt-md-0 d-flex navbar__center">
           <Link to="/cart" className="mr-3 mt-2 text-decoration-none d-flex">
             <span className="ml-3 navbar__cart">
               <i className="fas fa-shopping-cart"></i>

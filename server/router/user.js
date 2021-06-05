@@ -3,6 +3,7 @@ const userCtrl = require('../controllers/userCtrl')
 const authenticatedMiddleware = require('../middlewares/auth')
 const authorizeAdmin = require('../middlewares/authorizeAdmin')
 
+
 router.post('/register', userCtrl.register)
 
 router.post('/activation', userCtrl.activateEMail)

@@ -51,8 +51,8 @@ const Login = ({ history, location }) => {
     dispatch(logIn(email, password));
   };
 
-  // const responseGoogle = async (response) => {
-  //   console.log(response);
+  const responseGoogle = async (response) => {
+    console.log(response);
   //   try {
   //     const res = await axios.post("/api/auth/google_login", {
   //       tokenId: response.tokenId,
@@ -66,7 +66,7 @@ const Login = ({ history, location }) => {
   //     console.log(err);
   //     // err.response.data.message && toast.error(err.response.data.message);
   //   }
-  // };
+  };
   return (
     <Fragment>
       {loading ? (
@@ -114,14 +114,14 @@ const Login = ({ history, location }) => {
                   Đăng nhập
                 </Button>
 
-                {/* <div className="social">
+                <div className="social">
                   <GoogleLogin
                     clientId="216758887760-d4r7nhh99d6gipukedvi378nlakimg7g.apps.googleusercontent.com"
                     buttonText="Đăng nhập với google"
                     onSuccess={responseGoogle}
                     cookiePolicy={"single_host_origin"}
                   />
-                </div> */}
+                </div>
                 <Link
                   to="/register"
                   className="d-flex justify-content-center mt-3"

@@ -16,8 +16,8 @@ const cartReducer = (state = initialState, action) => {
 
       const itemExist = state.cartItems.find((i) => i.product === item.product);
 
-      console.log("item", item);
-      console.log("item exist: ", itemExist);
+      // console.log("item", item);
+      // console.log("item exist: ", itemExist);
 
       if (itemExist) {
         return {

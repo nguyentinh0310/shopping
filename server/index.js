@@ -6,6 +6,7 @@ const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 const router = require("./router");
 const { errorHandler } = require("./middlewares/errorHandler");
+const cloudinary = require('cloudinary')
 
 const app = express();
 app.use(express.json());
@@ -30,6 +31,13 @@ mongoose.connect(
     }
   }
 );
+
+// seting up cloudinary
+cloudinary.config({
+  cloud_name : process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET 
+})
 
 // Routes
 app.use(router);

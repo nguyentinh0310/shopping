@@ -22,8 +22,15 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Xin mời nhập mật khẩu'],
     },
     avatar:{
-        type: String,
-        default: "https://res.cloudinary.com/dwgximj2j/image/upload/v1622192495/avatars/bcxeglrzxde9m7byob0x.jpg"
+        public_id: {
+            type: String,
+            default: "avatar_default.jpg"
+        
+        },
+        url: {
+            type: String,
+            default: "https://res.cloudinary.com/dwgximj2j/image/upload/v1622192495/avatars/bcxeglrzxde9m7byob0x.jpg"
+        }
     },
 
     role: {

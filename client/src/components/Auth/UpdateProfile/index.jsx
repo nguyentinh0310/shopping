@@ -19,7 +19,7 @@ const UpdateProfile = () => {
   useEffect(() => {
     if (user) {
       setName(user.name);
-      setAvatar(user.avatar);
+      setAvatar(user.avatar.url);
     }
     if (err) {
       toast.error(err, {
@@ -45,16 +45,19 @@ const UpdateProfile = () => {
     formData.set("avatar", avatar);
     dispatch(updateProfile(token, formData));
   };
+
+
   const onChangeAvatar = (e) => {
-    // const reader = new FileReader();
+    const reader = new FileReader();
 
-    // reader.onload = () => {
-    //   if (reader.readyState === 2) {
-    //     setAvatar(reader.result);
-    //   }
-    // };
+    console.log(reader);
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+      }
+    };
 
-    // reader.readAsDataURL(e.target.files[0]);
+    reader.readAsDataURL(e.target.files[0]);
   };
   return (
     <Fragment>
@@ -84,7 +87,7 @@ const UpdateProfile = () => {
             <div className="form-group">
               <label htmlFor="email_field">Avatar</label>
               <div className="profile__avatar">
-                <img src={avatar ? avatar : user.avatar} alt="" />
+                <img src={avatar ? avatar : user.avatar.url} alt="" />
 
                 <span>
                   <i className="fas fa-camera"></i>
@@ -93,6 +96,8 @@ const UpdateProfile = () => {
                     type="file"
                     name="file"
                     id="file_up"
+                    className='custom-file-input'
+                    accept='image/*'
                     onChange={onChangeAvatar}
                   />
                 </span>
@@ -104,7 +109,7 @@ const UpdateProfile = () => {
               className="btn update-btn btn-block mt-4 mb-3"
               disabled={loading ? true : false}
             >
-              Update
+              Cập nhật
             </button>
           </form>
         </div>

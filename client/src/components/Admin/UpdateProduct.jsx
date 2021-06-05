@@ -48,7 +48,7 @@ const UpdateProduct = ({ match }) => {
 
     if (error) {
       toast.error(error, {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: toast.POSITION.BOTTOM_CENTER,
       });
       dispatch(clearErrors());
     }
@@ -59,7 +59,7 @@ const UpdateProduct = ({ match }) => {
     if (isUpdated) {
       history.push("/admin/products");
       toast.success("Cập nhật sản phẩm thành công", {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: toast.POSITION.BOTTOM_CENTER,
       });
 
       dispatch({ type: UPDATE_PRODUCT_RESET });
@@ -196,6 +196,7 @@ const UpdateProduct = ({ match }) => {
                       className="custom-file-input"
                       id="customFile"
                       onChange={handleOnChange}
+                      accept="image/*"
                       multiple
                     />
                     <label className="custom-file-label" htmlFor="customFile">
@@ -240,6 +241,6 @@ const UpdateProduct = ({ match }) => {
       </div>
     </Fragment>
   );
-}
+};
 
 export default UpdateProduct;
