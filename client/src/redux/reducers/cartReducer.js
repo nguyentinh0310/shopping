@@ -1,5 +1,6 @@
 import {
   ADD_TO_CART,
+  RESET_ITEM_CART,
   REMOVE_ITEM_CART,
   SAVE_SHIPPING_INFO,
 } from "redux/contants/cartContant";
@@ -38,6 +39,12 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         cartItems: state.cartItems.filter((i) => i.product !== action.payload),
       };
+
+      case RESET_ITEM_CART:
+        return {
+          ...state,
+          cartItems: [],
+        };
 
     case SAVE_SHIPPING_INFO:
       return {

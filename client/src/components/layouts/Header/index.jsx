@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { RESET_ITEM_CART } from "redux/contants/cartContant";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Header = () => {
   };
   const logOutHandler = () => {
     dispatch(logOut());
-
+    dispatch({type:RESET_ITEM_CART})
     toast.success("Đăng xuất thành công", {
       position: toast.POSITION.BOTTOM_CENTER
     });

@@ -12,11 +12,11 @@ productRouter.get("/all", productCtrl.getAll);
 productRouter.get("/:id", productCtrl.getSingleProduct);
 
 // review
-productRouter.get("/reviews/all",authenticatedMiddleware, productCtrl.getProductReviews);
+// productRouter.get("/reviews/all",authenticatedMiddleware, productCtrl.getProductReviews);
 
-productRouter.put("/review",authenticatedMiddleware, productCtrl.createProductReview);
+// productRouter.put("/review",authenticatedMiddleware, productCtrl.createProductReview);
 
-productRouter.delete("reviews/del", authenticatedMiddleware, productCtrl.deleteProductReviews)
+// productRouter.delete("reviews/del", authenticatedMiddleware, productCtrl.deleteProductReviews)
 
 // admin
 productRouter.post("/",authenticatedMiddleware,authorizeAdmin, productCtrl.create);
