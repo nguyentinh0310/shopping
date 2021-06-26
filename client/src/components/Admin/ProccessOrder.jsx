@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { clearErrors, getOrderDetails } from "redux/actions/orderAction";
+import { clearErrors, getOrderDetails, updateOrder } from "redux/actions/orderAction";
 import { UPDATE_ORDER_RESET } from "redux/contants/orderContant";
 import Sidebar from "./SideBar";
 
@@ -47,6 +47,10 @@ const ProccessOrder = ({ match }) => {
 
   const handleUpdateStatus = (id) => {
     console.log(id);
+    const formData = new FormData();
+    formData.set('status', status);
+
+    dispatch(updateOrder(id, formData,token))
   };
   return (
     <Fragment>
@@ -140,7 +144,7 @@ const ProccessOrder = ({ match }) => {
                       onChange={(e) => setStatus(e.target.value)}
                     >
                       <option value="Processing">Đang xử lý</option>
-                      <option value="Shipped">.......</option>
+                      <option value="Shipped">Đang giao hàng</option>
                       <option value="Delivered">Đã giao hàng</option>
                     </select>
                   </div>

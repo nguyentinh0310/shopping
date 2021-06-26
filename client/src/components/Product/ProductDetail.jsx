@@ -151,7 +151,7 @@ const ProductDetail = ({ match }) => {
                   className="mt-4"
                   onClick={handleShow}
                 >
-                  <h4>Đánh giá</h4>
+                  <span>Đánh giá</span>
                 </Button>
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header>

@@ -113,7 +113,7 @@ export const allOrders = (token) => async (dispatch) => {
 
     dispatch({
       type: ALL_ORDERS_SUCCESS,
-      payload: data.orders,
+      payload: data,
     });
   } catch (error) {
     dispatch({
@@ -136,7 +136,7 @@ export const updateOrder = (token, id, orderData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(`/api/order/${id}`, orderData, config);
-
+    console.log(data);
     dispatch({
       type: UPDATE_ORDER_SUCCESS,
       payload: data.success,

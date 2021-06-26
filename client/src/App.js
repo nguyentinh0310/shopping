@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { getToken } from "redux/actions/tokenAction";
 import { getUser } from "redux/actions/userAction";
 import "./App.scss";
+import { Suspense } from 'react';
+
 import Routes from "./Routes";
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
 
   useEffect(() => {
     const fistLogin = localStorage.getItem("userInfo");
-    if (fistLogin) {
+  if (fistLogin) {
       dispatch(getToken());
     }
   }, [dispatch, isAuthenticated]);
@@ -29,6 +31,8 @@ function App() {
     }
   }, [dispatch, token]);
   return (
+    <Suspense fallback={<div>Loading ...</div>}>
+
     <Router>
       <div className="App">
         <ScrollToTop/>
@@ -39,6 +43,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </Suspense>
   );
 }
 

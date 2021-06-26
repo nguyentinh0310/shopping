@@ -75,7 +75,7 @@ const orderCtrl = {
   updateProcessOrder: async (req, res, next) => {
     try {
       const order = await Order.findById(req.params.id);
-      if (order.orderStatus === "Đã giao hàng")
+      if (order.orderStatus === "Delivered")
         return res.status(400).json({ message: "Bạn đã nhận đơn hàng này" });
 
       order.orderItems.forEach(async (item) => {

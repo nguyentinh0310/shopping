@@ -25,6 +25,10 @@ body {
   border-radius: 5px;
 }
 
+h3,h4{
+  color: #8b8dff;
+}
+
 @import "scss/Abstracts/variables";
 @import "scss/Pages/Home";
 @import "scss/Pages/Login";

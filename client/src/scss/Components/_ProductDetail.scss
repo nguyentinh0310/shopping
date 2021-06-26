@@ -1,57 +1,59 @@
 #product_id {
-    color: grey;
-    font-size: 0.8rem;
+  color: grey;
+  font-size: 0.8rem;
+  color: #8b8dff;
 }
 
 #product_price {
-    font-size: 2rem;
-    font-weight: bold;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #8b8dff;
 }
 
 #cart_btn,
 #review_btn {
-    border-radius: 2rem;
-    background-color: $color-primary;
-    border: none;
-    padding: 0.5rem 2rem;
+  border-radius: 2rem;
+  background-color: $color-primary;
+  border: none;
+  padding: 0.5rem 2rem;
 }
 
 #product_seller {
-    color: grey;
-    font-size: 0.9rem;
+  color: grey;
+  font-size: 0.9rem;
 }
 
 #stock_status {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-left: 0.3rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 0.3rem;
 }
 
 .redColor {
-    color: red;
+  color: red;
 }
 
 .greenColor {
-    color: green;
+  color: green;
 }
 
 #product_image {
-    margin-top: 3.5rem;
+  margin-top: 3.5rem;
 }
 
 .stockCounter input {
-    border: none;
-    width: 3rem;
-    text-align: center;
+  border: none;
+  width: 3rem;
+  text-align: center;
 }
 
 .plus,
 .minus {
-    padding: 0.1rem 0.5rem;
+  padding: 0.1rem 0.5rem;
 }
 
 .stockCounter input::-webkit-outer-spin-button,
 .stockCounter input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }

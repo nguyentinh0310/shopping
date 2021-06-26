@@ -7,6 +7,7 @@ import { allOrders } from "redux/actions/orderAction";
 import { getAdminProducts } from "redux/actions/productAction";
 import { allUsers } from "redux/actions/userAction";
 import Sidebar from "./SideBar";
+import CountUp from "react-countup";
 
 const Dashboard = () => {
   const formater = new Intl.NumberFormat("vi-VN", {
@@ -21,7 +22,6 @@ const Dashboard = () => {
   );
   const token = useSelector((state) => state.token);
 
-  console.log(totalAmount);
   useEffect(() => {
     dispatch(getAdminProducts());
     dispatch(allUsers(token));
@@ -56,8 +56,7 @@ const Dashboard = () => {
                     <div className="card-body">
                       <div className="text-center card-font-size">
                         Tổng tiền
-                        {/* <br /> <b>{formater.format(totalAmount)}</b> */}
-                        <br /> <b>{totalAmount}</b>
+                        <br /> <b>{formater.format(totalAmount)}</b>
                       </div>
                     </div>
                   </div>
@@ -70,7 +69,7 @@ const Dashboard = () => {
                     <div className="card-body">
                       <div className="text-center card-font-size">
                         Sản phẩm
-                        <br /> <b>{products && products.length}</b>
+                        <br /> <b> <CountUp end={products && products.length} duration={2}/></b>
                       </div>
                     </div>
                     <Link
@@ -90,7 +89,7 @@ const Dashboard = () => {
                     <div className="card-body">
                       <div className="text-center card-font-size">
                         Đơn hàng
-                        <br /> <b>{orders && orders.length}</b>
+                        <br /> <b><CountUp end={orders && orders.length} duration={2}/></b>
                       </div>
                     </div>
                     <Link
@@ -110,7 +109,7 @@ const Dashboard = () => {
                     <div className="card-body">
                       <div className="text-center card-font-size">
                         Người dùng
-                        <br /> <b>{users && users.length}</b>
+                        <br /> <b> <CountUp end={users && users.length} duration={2}/></b>
                       </div>
                     </div>
                     <Link
@@ -130,7 +129,7 @@ const Dashboard = () => {
                     <div className="card-body">
                       <div className="text-center card-font-size">
                         Out of Stock
-                        <br /> <b>{outOfStock}</b>
+                        <br /> <b><CountUp end={outOfStock} duration={2}/></b>
                       </div>
                     </div>
                   </div>

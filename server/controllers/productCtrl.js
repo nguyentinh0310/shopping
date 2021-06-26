@@ -209,7 +209,34 @@ const productCtrl = {
   // Review
   createProductReview: async (req, res, next) => {
     try {
-    
+      const { rating, comment, productId } = req.body;
+
+      const review = {
+        user: req.user.id,
+        name: req.user.name,
+        rating: Number(rating),
+        comment,
+      };
+
+      const product = await Product.findById(productId);
+
+      const isReviewed = product.reviews.find(
+        (r) => r.user.toString() === req.user.id.toString()
+      );
+
+      if (isReviewed) {
+        res.status(400).json({
+          success: false,
+          message: "Đã bình luận sản phẩm này rồi",
+        });
+      } else {
+        product.reviews.push(review);
+        product.numberOfReviews = product.reviews.length;
+      }
+      // tinh rating
+      product.ratings =
+        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        product.reviews.length;
 
       res.status(200).json({
         success: true,

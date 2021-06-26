@@ -13,20 +13,16 @@ import {
     switch (action.type) {
       case ALL_ORDERS_REQUEST:
         return {
-          ...state,
           loading: true,
         };
       case ALL_ORDERS_SUCCESS:
-        console.log(action.payload);
         return {
-          ...state,
           loading: false,
-          orders: action.payload,
+          orders: action.payload.orders,
           totalAmount: action.payload.totalAmount
         };
       case ALL_ORDERS_FAIL:
         return {
-          ...state,
           loading: false,
           error: action.payload,
         };
