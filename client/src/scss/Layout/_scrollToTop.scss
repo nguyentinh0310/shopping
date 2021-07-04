@@ -1,25 +1,25 @@
 .scroll-to-top {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: $color-primary;
-    color: #ffffff;
-    bottom: 15px;
-    right: 12px;
-    cursor: pointer;
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $color-primary;
+  color: #ffffff;
+  bottom: 15px;
+  right: 12px;
+  cursor: pointer;
+}
+
+.scroll-to-top .icon {
+  margin-top: 10px;
+  animation: scrollTop 0.5s alternate ease;
+}
+
+@keyframes scrollTop {
+  from {
+    transform: translateY(2px);
   }
-  
-  .scroll-to-top .icon {
-    margin-top: 10px;
-    animation: scrollTop 0.5s alternate ease;
+  to {
+    transform: translateY(-1px);
   }
-  
-  @keyframes scrollTop {
-    from {
-      transform: translateY(2px);
-    }
-    to {
-      transform: translateY(-1px);
-    }
-  }
+}

@@ -84,9 +84,8 @@ const ProductDetail = ({ match }) => {
               </div>
 
               <div className="col-12 col-lg-7 mt-5">
-                <h3>{product.name}</h3>
-                <p id="product_id">Mã sản phẩm: {product._id}</p>
-
+                <h3 className="product_title">{product.name}</h3>
+                <p className="product_id">Mã sản phẩm: {product._id}</p>
                 <hr />
 
                 <div className="ratings__outer">
@@ -130,7 +129,7 @@ const ProductDetail = ({ match }) => {
                 <hr />
 
                 <p>
-                  Trạng thái:{" "}
+                  Trạng thái:
                   <span
                     className={product.stock > 0 ? "greenColor" : "redColor"}
                   >
@@ -142,7 +141,7 @@ const ProductDetail = ({ match }) => {
                 <hr />
 
                 <h4 className="mt-2">Mô tả:</h4>
-                <p>{product.description}</p>
+                <p className="description">{product.description}</p>
                 <hr />
 
                 <Button

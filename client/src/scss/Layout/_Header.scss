@@ -2,6 +2,7 @@
   background-color: #232f3e;
   padding: 1rem 0;
   display: flex;
+  font-family: 'Uchen', serif;
   justify-content: center !important;
   ul {
     background-color: white;
@@ -15,12 +16,12 @@
     }
   }
 
-
   li a {
-    font-weight: 500;
+    font-weight: 700;
     color: $color-primary-dark;
-    letter-spacing: 1.5px;
-
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-family: 'Uchen', serif;
     text-decoration: none;
   }
 
@@ -45,7 +46,7 @@
     padding: 0.4rem 1.8rem;
     font-family: calibri;
   }
-  &__center{
+  &__center {
     justify-content: flex-end;
   }
   &__cart {
@@ -63,6 +64,9 @@
     height: 40px;
     border-radius: 50%;
   }
+  &__avatar span {
+    font-size: 15px !important;
+  }
 
   &__drop-nav {
     position: relative;
@@ -71,6 +75,8 @@
   &__drop-nav a {
     text-transform: capitalize;
     overflow: hidden;
+    font-size: 13px;
+    font-weight: 600;
   }
   &__dropdown {
     position: absolute;
@@ -83,30 +89,28 @@
   &__dropdown li {
     display: block;
   }
-  &__drop-nav:hover  .navbar__dropdown{
+  &__drop-nav:hover .navbar__dropdown {
     display: block;
   }
 }
 
-@media only screen and (max-width:1200px){
+@media only screen and (max-width: 1200px) {
   .navbar {
     &__login--btn {
       padding: 0.2rem 1rem;
-      
     }
-    &__center{
+    &__center {
       justify-content: center;
     }
   }
 }
 
-@media only screen and (max-width:768px){
+@media only screen and (max-width: 768px) {
   .navbar {
     &__login--btn {
       padding: 0.2rem 1rem;
-      
     }
-    &__center{
+    &__center {
       display: flex;
       justify-content: center;
     }
@@ -116,14 +120,12 @@
     }
     &__input {
       width: 100%;
-     
     }
-
   }
 }
 
-@media only screen and (max-width:576px){
+@media only screen and (max-width: 576px) {
 }
 
-@media only screen and (max-width:480px){
+@media only screen and (max-width: 480px) {
 }

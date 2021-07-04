@@ -1,41 +1,39 @@
-
-
 /* Reviews */
 
 .rating {
-    margin-top: 10rem;
+  margin-top: 10rem;
 }
 
 .stars {
-    display: flex;
-    justify-content: center;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    padding-left: 0;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
 }
 
 .star {
-    display: inline;
-    list-style: none;
-    font-size: 3rem;
-    padding-left: 0.9rem;
-    color: #e3e3e3;
+  display: inline;
+  list-style: none;
+  font-size: 3rem;
+  padding-left: 0.9rem;
+  color: #e3e3e3;
 }
 
 .star:first-child {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 .orange {
-    color: $color-primary;
+  color: $color-primary;
 }
 
 .yellow {
-    color: #fdcc0d;
+  color: #fdcc0d;
 }
 
 .review_user {
-    font-size: 0.8rem;
-    color: grey;
+  font-size: 0.8rem;
+  color: grey;
 }

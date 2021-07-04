@@ -1,18 +1,25 @@
-#product_id {
+.product_id {
   color: grey;
   font-size: 0.8rem;
   color: #8b8dff;
+}
+.product_title{
+  font-weight: 600;
 }
 
 #product_price {
   font-size: 2rem;
   font-weight: bold;
   color: #8b8dff;
+  font-family: 'Uchen', serif;
 }
-
+.description {
+  font-family: 'Uchen', serif;
+}
 #cart_btn,
 #review_btn {
   border-radius: 2rem;
+  font-family: 'Uchen', serif;
   background-color: $color-primary;
   border: none;
   padding: 0.5rem 2rem;

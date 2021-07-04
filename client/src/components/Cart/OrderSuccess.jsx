@@ -14,7 +14,7 @@ const OrderSuccess = () => {
             height="200"
           />
 
-          <h2>Đơn hàng của bạn đã được đặt thành công.</h2>
+          <h1>Đơn hàng của bạn đã được đặt thành công.</h1>
 
           <Link to="/orders/me">Đi tới đơn hàng</Link>
         </div>

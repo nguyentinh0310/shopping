@@ -51,7 +51,7 @@ const Cart = () => {
       <MetaData title={"Trang giỏ hàng"} />
       <div className="container cart">
         {cartItems.length === 0 ? (
-          <h2>Giỏ hàng không có sản phẩm nào</h2>
+          <h1 className="text-center mt-3">Giỏ hàng không có sản phẩm nào</h1>
         ) : (
           <Fragment>
             <h2 className="mt-5">
