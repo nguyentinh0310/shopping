@@ -411,16 +411,17 @@ const userCtrl = {
             avatar: picture,
           });
 
-          await newUser.save();
+          const savedUser = await newUser.save();
 
-          const refresh_token = createRefreshToken({ id: newUser._id });
-          res.cookie("refreshtoken", refresh_token, {
-            httpOnly: true,
-            path: "/user/refresh_token",
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+          const refresh_token = createRefreshToken({ id: user._id }); // xét mã id
+          res.cookie("refresh_token", refresh_token, {
+            httpOnlly: true,
+            path: "/api/auth/refresh_token",
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 day
           });
+    
 
-          res.status(200).json({ message: "Đăng nhập thành công!" });
+          res.status(200).json(savedUser);
         }
       }
     } catch (err) {

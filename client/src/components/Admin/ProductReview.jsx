@@ -1,62 +1,78 @@
-import MetaData from "components/layouts/MetaData";
-import { MDBDataTable } from "mdbreact";
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { clearErrors, getProductReviews } from "redux/actions/reviewAction";
-import Sidebar from "./SideBar";
+import MetaData from 'components/layouts/MetaData';
+import { MDBDataTable } from 'mdbreact';
+import React, { useEffect, useState } from 'react';
+import { Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors, deleteReview, getProductReviews } from 'redux/actions/reviewAction';
+import { DELETE_REVIEW_RESET } from 'redux/contants/reviewContant';
+import Sidebar from './SideBar';
 
 const ProductReview = () => {
-  const [productId, setProductId] = useState("");
+  const [productId, setProductId] = useState('');
 
   const dispatch = useDispatch();
   const { error, reviews } = useSelector((state) => state.allReviews);
   const token = useSelector((state) => state.token);
-
+  const { isDeleted, error: deleteError } = useSelector((state) => state.deleteReview);
   useEffect(() => {
     if (error) {
-        toast.error(error, {
-          position: toast.POSITION.BOTTOM_CENTER,
-        });
-        dispatch(clearErrors());
-      }
-    if (productId !== '') {
-        dispatch(getProductReviews(token,productId))
+      toast.error(error, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      dispatch(clearErrors());
     }
-  }, [dispatch,error,token,productId])
+    if (productId !== '') {
+      dispatch(getProductReviews(token, productId));
+    }
+    if (deleteError) {
+      toast.error(deleteError, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      toast.success('Xóa đánh giá sản phẩm thành công', {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      dispatch({ type: DELETE_REVIEW_RESET });
+    }
+  }, [dispatch, error, token, productId, isDeleted, deleteError]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getProductReviews(token,productId))
+    dispatch(getProductReviews(token, productId));
   };
-
+  const handleDelete = (token,id) => {
+    dispatch(deleteReview(token,id, productId));
+  };
   const setReviews = () => {
     const data = {
       columns: [
         {
-          label: "Review ID",
-          field: "id",
-          sort: "asc",
+          label: 'ID',
+          field: 'id',
+          sort: 'asc',
         },
         {
-          label: "Rating",
-          field: "rating",
-          sort: "asc",
+          label: 'Rating',
+          field: 'rating',
+          sort: 'asc',
         },
         {
-          label: "Comment",
-          field: "comment",
-          sort: "asc",
+          label: 'Bình luận',
+          field: 'comment',
+          sort: 'asc',
         },
+        // {
+        //   label: 'User',
+        //   field: 'user',
+        //   sort: 'asc',
+        // },
         {
-          label: "User",
-          field: "user",
-          sort: "asc",
-        },
-        {
-          label: "Actions",
-          field: "actions",
+          label: 'Hành động',
+          field: 'actions',
         },
       ],
       rows: [],
@@ -67,7 +83,7 @@ const ProductReview = () => {
         id: review._id,
         rating: review.rating,
         comment: review.comment,
-        user: review.name,
+        // user: review.name,
 
         actions: (
           <button
@@ -83,12 +99,9 @@ const ProductReview = () => {
     return data;
   };
 
-  const handleDelete = (token, id) => {
-    console.log(id);
-  };
   return (
     <Fragment>
-      <MetaData title={"Product Reviews"} />
+      <MetaData title={'Đánh giá sản phẩm'} />
       <div className="row">
         <div className="col-12 col-md-2">
           <Sidebar />
@@ -122,15 +135,9 @@ const ProductReview = () => {
             </div>
 
             {reviews && reviews.length > 0 ? (
-              <MDBDataTable
-                data={setReviews()}
-                className="px-3"
-                bordered
-                striped
-                hover
-              />
+              <MDBDataTable data={setReviews()} className="px-3" bordered striped hover />
             ) : (
-              <p className="mt-5 text-center">No Reviews.</p>
+              <p className="mt-5 text-center">Không có đánh giá nào.</p>
             )}
           </Fragment>
         </div>

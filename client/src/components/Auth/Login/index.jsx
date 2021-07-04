@@ -53,19 +53,19 @@ const Login = ({ history, location }) => {
 
   const responseGoogle = async (response) => {
     console.log(response);
-  //   try {
-  //     const res = await axios.post("/api/auth/google_login", {
-  //       tokenId: response.tokenId,
-  //     });
-  //     // setValues(res.data.message);
+    // try {
+    //   const res = await axios.post("/api/auth/google_login", {
+    //     tokenId: response.tokenId,
+    //   });
+    //   setValues(res.data);
 
-  //     toast.success(res.data.message);
-  //     // localStorage.setItem("userInfo", JSON.stringify(res));
-  //     // history.push("/");
-  //   } catch (err) {
-  //     console.log(err);
-  //     // err.response.data.message && toast.error(err.response.data.message);
-  //   }
+    //   // toast.success(res.data.message);
+    //   localStorage.setItem("userInfo", JSON.stringify(res));
+    //   history.push("/");
+    // } catch (err) {
+    //   console.log(err);
+    //   // err.response.data.message && toast.error(err.response.data.message);
+    // }
   };
   return (
     <Fragment>

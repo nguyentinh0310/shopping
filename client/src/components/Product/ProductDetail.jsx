@@ -1,27 +1,30 @@
-import { clearErrors, getProductDetail } from "redux/actions/productAction";
-import Loader from "components/layouts/Loader";
-import MetaData from "components/layouts/MetaData";
-import React, { Fragment, useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Carousel } from "react-responsive-carousel";
-import { addItemToCart } from "redux/actions/cartAction";
-import { toast } from "react-toastify";
+import Loader from 'components/layouts/Loader';
+import MetaData from 'components/layouts/MetaData';
+import ListReview from 'components/Review/ListReview';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Alert, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Carousel } from 'react-responsive-carousel';
+import { toast } from 'react-toastify';
+import { addItemToCart } from 'redux/actions/cartAction';
+import { clearErrors, getProductDetail } from 'redux/actions/productAction';
+import { newReview } from 'redux/actions/reviewAction';
+import { NEW_REVIEW_RESET } from 'redux/contants/reviewContant';
 
 const ProductDetail = ({ match }) => {
-  const formater = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
+  const formater = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
   });
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
-  const { loading, product, error } = useSelector(
-    (state) => state.productDetail
-  );
+  const { user } = useSelector((state) => state.auth);
+  const token = useSelector((state) => state.token);
+  const { loading, product, error } = useSelector((state) => state.productDetail);
+  const { error: reviewError, success } = useSelector((state) => state.newReview);
 
   useEffect(() => {
     // lấy params đúng param sản phẩm
@@ -29,9 +32,23 @@ const ProductDetail = ({ match }) => {
     if (error) {
       dispatch(clearErrors());
     }
-  }, [dispatch, error, match.params.id]);
+
+    if (reviewError) {
+      toast.error(reviewError, {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      dispatch(clearErrors());
+    }
+
+    if (success) {
+      toast.success('Đánh giá sản phẩm thành công', {
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+      dispatch({ type: NEW_REVIEW_RESET });
+    }
+  }, [dispatch, error, match.params.id, reviewError, success]);
   const increaseQty = () => {
-    const count = document.querySelector(".count");
+    const count = document.querySelector('.count');
 
     if (count.valueAsNumber >= product.stock) return;
 
@@ -40,7 +57,7 @@ const ProductDetail = ({ match }) => {
   };
 
   const decreaseQty = () => {
-    const count = document.querySelector(".count");
+    const count = document.querySelector('.count');
 
     if (count.valueAsNumber <= 1) return;
 
@@ -50,14 +67,61 @@ const ProductDetail = ({ match }) => {
 
   const addToCart = () => {
     if (product.stock === 0) {
-      document.getElementById("cart_btn").disabled = true;
+      document.getElementById('cart_btn').disabled = true;
     } else {
       dispatch(addItemToCart(match.params.id, quantity));
-      toast.success("Thêm vào giỏ thành công",
-      {
-        position: toast.POSITION.BOTTOM_CENTER
+      toast.success('Thêm vào giỏ thành công', {
+        position: toast.POSITION.BOTTOM_CENTER,
       });
     }
+  };
+
+  function setUserRatings() {
+    const stars = document.querySelectorAll('.star');
+
+    console.log(stars);
+    stars.forEach((star, index) => {
+      star.starValue = index + 1;
+      ['click', 'mouseover', 'mouseout'].forEach(function (e) {
+        star.addEventListener(e, showRatings);
+      });
+    });
+
+    function showRatings(e) {
+      stars.forEach((star, index) => {
+        if (e.type === 'click') {
+          if (index < this.starValue) {
+            star.classList.add('orange');
+
+            setRating(this.starValue);
+          } else {
+            star.classList.remove('orange');
+          }
+        }
+
+        if (e.type === 'mouseover') {
+          if (index < this.starValue) {
+            star.classList.add('yellow');
+          } else {
+            star.classList.remove('yellow');
+          }
+        }
+
+        if (e.type === 'mouseout') {
+          star.classList.remove('yellow');
+        }
+      });
+    }
+  }
+
+  const handleSubmitReview = () => {
+    const formData = new FormData();
+
+    formData.set('rating', rating);
+    formData.set('comment', comment);
+    formData.set('productId', match.params.id);
+
+    dispatch(newReview(token, formData));
   };
 
   return (
@@ -66,11 +130,11 @@ const ProductDetail = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={"Chi tiết sản phẩm"} />
+          <MetaData title={'Chi tiết sản phẩm'} />
           <div className="container">
             <div className="row f-flex justify-content-around product">
               <div className="col-12 col-lg-5  img-fluid" id="product_image">
-              <Carousel pause="hover">
+                <Carousel pause="hover">
                   {product.images &&
                     product.images.map((image) => (
                       <img
@@ -130,10 +194,8 @@ const ProductDetail = ({ match }) => {
 
                 <p>
                   Trạng thái:
-                  <span
-                    className={product.stock > 0 ? "greenColor" : "redColor"}
-                  >
-                    {product.stock > 0 ? "Còn hàng" : "Hết hàng"}
+                  <span className={product.stock > 0 ? 'greenColor' : 'redColor'}>
+                    {product.stock > 0 ? 'Còn hàng' : 'Hết hàng'}
                   </span>
                 </p>
 
@@ -143,61 +205,97 @@ const ProductDetail = ({ match }) => {
                 <h4 className="mt-2">Mô tả:</h4>
                 <p className="description">{product.description}</p>
                 <hr />
-
-                <Button
-                  id="review_btn"
-                  type="button"
-                  className="mt-4"
-                  onClick={handleShow}
-                >
-                  <span>Đánh giá</span>
-                </Button>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header>
-                    <h3>Đánh giá sản phẩm</h3>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <ul className="stars ">
-                      <li className="star">
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li className="star">
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li className="star">
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li className="star">
-                        <i className="fa fa-star"></i>
-                      </li>
-                      <li className="star">
-                        <i className="fa fa-star"></i>
-                      </li>
-                    </ul>
-
-                    <textarea
-                      name="review"
-                      id="review"
-                      rows="6"
-                      className="form-control mt-3"
-                    ></textarea>
-
-                    <Button
-                      id="review_btn"
-                      onClick={handleClose}
-                      className="btn my-3 float-right review-btn px-4 text-white"
+                {user ? (
+                  <button
+                    id="review_btn"
+                    type="button"
+                    className="btn btn-primary mt-4"
+                    data-toggle="modal"
+                    data-target="#ratingModal"
+                    onClick={setUserRatings}
+                  >
+                    Đánh giá
+                  </button>
+                ) : (
+                  <Alert variant="danger">Đăng nhập để đánh giá sản phẩm</Alert>
+                )}
+                <div className="row mt-2 mb-5">
+                  <div className="rating w-50">
+                    <div
+                      className="modal fade"
+                      id="ratingModal"
+                      tabIndex="-1"
+                      role="dialog"
+                      aria-labelledby="ratingModalLabel"
+                      aria-hidden="true"
                     >
-                      Đồng ý
-                    </Button>
-                  </Modal.Body>
-                </Modal>
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h3 className="modal-title text-center" id="ratingModalLabel">
+                              Đánh giá
+                            </h3>
+                            <button
+                              type="button"
+                              className="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div className="modal-body">
+                            <ul className="stars">
+                              <li className="star">
+                                <i className="fa fa-star"></i>
+                              </li>
+                              <li className="star">
+                                <i className="fa fa-star"></i>
+                              </li>
+                              <li className="star">
+                                <i className="fa fa-star"></i>
+                              </li>
+                              <li className="star">
+                                <i className="fa fa-star"></i>
+                              </li>
+                              <li className="star">
+                                <i className="fa fa-star"></i>
+                              </li>
+                            </ul>
+
+                            <textarea
+                              name="review"
+                              id="review"
+                              className="form-control mt-3"
+                              value={comment}
+                              onChange={(e) => setComment(e.target.value)}
+                            ></textarea>
+
+                            <Button
+                              id="review_btn"
+                              onClick={handleSubmitReview}
+                              data-dismiss="modal"
+                              aria-label="Close"
+                              className="btn my-3 float-right review-btn px-4 text-white"
+                            >
+                              Đồng ý
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+              {product.reviews && product.reviews.length > 0 && (
+                <ListReview reviews={product.reviews} />
+              )}
           </div>
         </Fragment>
       )}
     </Fragment>
   );
-}
+};
 
 export default ProductDetail;

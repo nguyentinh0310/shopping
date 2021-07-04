@@ -23,7 +23,7 @@ export const newReview = (token,reviewData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.put(`/api/product/review/new`, reviewData, config);
+    const { data } = await axios.put(`/api/product/review`, reviewData, config);
 
     dispatch({
       type: NEW_REVIEW_SUCCESS,
@@ -74,7 +74,7 @@ export const deleteReview = (token, id, productId) => async (dispatch) => {
       };
 
     const { data } = await axios.delete(
-      `/api/v1/reviews?id=${id}&productId=${productId}`, config
+      `/api/product/reviews/sp?id=${id}&productId=${productId}`, config
     );
 
     dispatch({

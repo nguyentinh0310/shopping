@@ -207,36 +207,36 @@ const productCtrl = {
   },
 
   // Review
-  createProductReview: async (req, res, next) => {
+  createReviewProduct: async (req, res, next) => {
     try {
       const { rating, comment, productId } = req.body;
 
       const review = {
-        user: req.user.id,
+        user: req.user._id,
         name: req.user.name,
         rating: Number(rating),
         comment,
       };
 
+      console.log(review);
       const product = await Product.findById(productId);
 
-      const isReviewed = product.reviews.find(
-        (r) => r.user.toString() === req.user.id.toString()
-      );
+      const isReviewed = product.reviews.find((r) => r.user === req.user._id);
 
       if (isReviewed) {
-        res.status(400).json({
+        return res.status(400).json({
           success: false,
-          message: "Đã bình luận sản phẩm này rồi",
-        });
+          message: "Đã bình luận sản phẩm này rồi",}) 
       } else {
         product.reviews.push(review);
         product.numberOfReviews = product.reviews.length;
       }
-      // tinh rating
+
       product.ratings =
         product.reviews.reduce((acc, item) => item.rating + acc, 0) /
         product.reviews.length;
+
+      await product.save({ validateBeforeSave: false });
 
       res.status(200).json({
         success: true,
@@ -265,7 +265,7 @@ const productCtrl = {
       const product = await Product.findById(req.query.productId);
 
       const reviews = product.reviews.filter(
-        (review) => review._id.toString() !== req.query.id.toString()
+        (review) => review._id !== req.query.id
       );
 
       const numberOfReviews = reviews.length;

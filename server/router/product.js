@@ -13,9 +13,9 @@ productRouter.get("/:id", productCtrl.getSingleProduct);
 // review
 productRouter.get("/reviews/all",authenticatedMiddleware, productCtrl.getProductReviews);
 
-productRouter.put("/review",authenticatedMiddleware, productCtrl.createProductReview);
+productRouter.put("/review",authenticatedMiddleware, productCtrl.createReviewProduct);
 
-productRouter.delete("reviews/del", authenticatedMiddleware, productCtrl.deleteProductReviews)
+productRouter.delete("reviews/sp", authenticatedMiddleware, productCtrl.deleteProductReviews)
 
 // admin
 productRouter.post("/",authenticatedMiddleware,authorizeAdmin, productCtrl.create);
