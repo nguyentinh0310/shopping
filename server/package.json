@@ -24,6 +24,10 @@
     "nodemailer": "^6.5.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-cli": "^6.26.0",
     "nodemon": "^2.0.7"
   }
 }
