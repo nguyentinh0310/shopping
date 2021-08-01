@@ -144,7 +144,7 @@ const Cart = () => {
                       {cartItems.reduce(
                         (acc, item) => acc + Number(item.quantity),
                         0
-                      )}{" "}
+                      )}
                       (sản phẩm)
                     </span>
                   </p>

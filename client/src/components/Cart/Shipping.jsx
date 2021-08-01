@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { saveShippingInfo } from "redux/actions/cartAction";
 import { toast } from "react-toastify";
+import { isNumberPgone } from "components/utils/Validation";
 
 const Shipping = () => {
   const { shippingInfo } = useSelector((state) => state.cart);
@@ -15,18 +16,15 @@ const Shipping = () => {
   const [city, setCity] = useState(shippingInfo.city);
   const [phone, setPhone] = useState(shippingInfo.phone);
 
-  // const [address, setAddress] = useState('');
-  // const [district, setDistrict] = useState('');
-  // const [city, setCity] = useState('');
-  // const [phone, setPhone] = useState('');
+
 
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (phone.length !== 10) {
-      toast.error("Số điện thoại dịnh dạng 10 số ", {
+    if (!isNumberPgone(phone)) {
+      toast.error("Số điện thoại không đúng định dạng ", {
         position: toast.POSITION.BOTTOM_CENTER,
       });
     } else if (!address || !district || !city) {

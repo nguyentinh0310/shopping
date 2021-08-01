@@ -61,7 +61,7 @@ const ComfirmOrder = () => {
 
       <CheckoutSteps shipping confirmOrder />
 
-      <div className="row d-flex justify-content-between">
+      <div className="row d-flex justify-content-between ">
         <div className="col-12 col-lg-8 mt-5 order-confirm">
           <h4 className="mb-3">Thông tin vận chuyển</h4>
           <p>

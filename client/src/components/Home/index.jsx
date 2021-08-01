@@ -1,41 +1,35 @@
-import Loader from "components/layouts/Loader";
-import queryString from "query-string";
-import Slider from "rc-slider";
-import React, { Fragment, useEffect, useState } from "react";
-import Pagination from "react-js-pagination";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router";
-import { toast } from "react-toastify";
-import { clearErrors, getProduct } from "redux/actions/productAction";
-import MetaData from "../layouts/MetaData";
-import Product from "../Product/Product";
+import Loader from 'components/layouts/Loader';
+import queryString from 'query-string';
+import Slider from 'rc-slider';
+import React, { Fragment, useEffect, useState } from 'react';
+import Pagination from 'react-js-pagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
+import { toast } from 'react-toastify';
+import { clearErrors, getProduct } from 'redux/actions/productAction';
+import MetaData from '../layouts/MetaData';
+import Product from '../Product/Product';
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
 const Home = ({ match }) => {
-  const formater = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
+  const formater = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
   });
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000000]);
   const [rating, setRating] = useState(0);
 
-  const categories = ["Quần áo", "Giày dép", "Khác"];
+  const categories = ['Quần áo', 'Giày dép', 'Khác'];
 
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-  const {
-    loading,
-    error,
-    products,
-    productsCount,
-    resPerPage,
-    filteredProductsCount,
-  } = useSelector((state) => state.products);
+  const { loading, error, products, productsCount, resPerPage, filteredProductsCount } =
+    useSelector((state) => state.products);
   const keyword = match.params.keyword;
 
   useEffect(() => {
@@ -49,7 +43,7 @@ const Home = ({ match }) => {
     dispatch(getProduct(keyword, currentPage, price, category, rating));
     if (error) {
       toast.error(error, {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: toast.POSITION.BOTTOM_CENTER,
       });
       dispatch(clearErrors());
     }
@@ -67,7 +61,7 @@ const Home = ({ match }) => {
   return (
     <Fragment>
       <Fragment>
-        <MetaData title={"Trang chủ"} />
+        <MetaData title={'Trang chủ'} />
         <section className="homepage mt-3 container">
           <div className="row">
             {/* {keyword ? ( */}
@@ -80,8 +74,8 @@ const Home = ({ match }) => {
                     {categories.map((category) => (
                       <li
                         style={{
-                          cursor: "pointer",
-                          listStyleType: "none",
+                          cursor: 'pointer',
+                          listStyleType: 'none',
                         }}
                         key={category}
                         onClick={() => setCategory(category)}
@@ -107,7 +101,7 @@ const Home = ({ match }) => {
                     tipFormatter={(value) => `${formater.format(value)}`}
                     value={price}
                     tipProps={{
-                      placement: "bottom",
+                      placement: 'bottom',
                       visible: true,
                     }}
                     onChange={(price) => setPrice(price)}
@@ -123,8 +117,8 @@ const Home = ({ match }) => {
                     {[5, 4, 3, 2, 1].map((star) => (
                       <li
                         style={{
-                          cursor: "pointer",
-                          listStyleType: "none",
+                          cursor: 'pointer',
+                          listStyleType: 'none',
                         }}
                         key={star}
                         onClick={() => setRating(star)}
@@ -158,25 +152,24 @@ const Home = ({ match }) => {
               </div>
             </Fragment>
           </div>
+          {resPerPage <= count && (
+            <div className="d-flex justify-content-center mt-3">
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={resPerPage}
+                totalItemsCount={count}
+                onChange={setCurrentPageNumber}
+                nextPageText={'Tiếp'}
+                prevPageText={'Trước'}
+                firstPageText={'Đầu'}
+                lastPageText={'Cuối'}
+                itemClass="page-item"
+                linkClass="page-link"
+                activeClass="page-item"
+              />
+            </div>
+          )}
         </section>
-
-        {resPerPage <= count && (
-          <div className="d-flex justify-content-center ">
-            <Pagination
-              activePage={currentPage}
-              itemsCountPerPage={resPerPage}
-              totalItemsCount={count}
-              onChange={setCurrentPageNumber}
-              nextPageText={"Tiếp"}
-              prevPageText={"Trước"}
-              firstPageText={"Đầu"}
-              lastPageText={"Cuối"}
-              itemClass="page-item"
-              linkClass="page-link"
-              activeClass="page-item"
-            />
-          </div>
-        )}
       </Fragment>
     </Fragment>
   );
